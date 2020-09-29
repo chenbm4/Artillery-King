@@ -1,7 +1,10 @@
 import 'phaser';
+import { Cursor } from './services/player/cursor';
 
 export default class Demo extends Phaser.Scene
 {
+    private cursor: Cursor;
+
     constructor ()
     {
         super('demo');
@@ -13,15 +16,17 @@ export default class Demo extends Phaser.Scene
         this.load.image('libs', 'assets/libs.png');
         this.load.glsl('bundle', 'assets/plasma-bundle.glsl.js');
         this.load.glsl('stars', 'assets/starfields.glsl.js');
+        this.load.image('cursor', 'assets/cursor.png');
     }
 
     create ()
     {
-        this.add.shader('RGB Shift Field', 0, 0, 800, 600).setOrigin(0);
-
-        this.add.shader('Plasma', 0, 412, 800, 172).setOrigin(0);
-
-        this.add.image(400, 300, 'libs');
+        // this.cursor = new Cursor({
+        //     scene: this,
+        //     x: this.game.input.activePointer.x,
+        //     y: this.game.input.activePointer.y,
+        //     key: 'cursor'
+        // });
 
         const logo = this.add.image(400, 70, 'logo');
 
@@ -33,6 +38,10 @@ export default class Demo extends Phaser.Scene
             yoyo: true,
             repeat: -1
         })
+    }
+    update ()
+    {
+        //this.cursor.update();
     }
 }
 
